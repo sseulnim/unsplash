@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-// SVG 파일들을 import
 import logoSvg from "../assets/logo.svg";
 import searchSvg from "../assets/search.svg";
 import menuSvg from "../assets/menu.svg";
+import visualSearchSvg from "../assets/visual_search.svg";
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -16,37 +15,35 @@ const HeaderWrapper = styled.header`
 const TopHeader = styled.div`
   display: flex;
   align-items: center;
-  padding: 10px 20px;
+  padding: 0 20px;
+  height: 56px;
 `;
 
-const Logo = styled.div`
-  margin-right: 20px;
-`;
+const Logo = styled.div``;
 
 const SearchWrapper = styled.div`
   flex-grow: 1;
   display: flex;
   align-items: center;
-  background-color: #ebebeb;
+  margin-left: 16px;
+  margin-right: 20px;
+  height: 40px;
   border-radius: 24px;
-  margin: 0 20px;
-  padding: 0 10px;
-  position: relative;
+  background-color: #ebebeb;
+  overflow: hidden;
 `;
 
-const SearchIcon = styled.div`
-  position: absolute;
-  left: 10px;
+const SearchIconWrapper = styled.div`
   display: flex;
   align-items: center;
-  svg {
-    fill: #6b6b6b;
-  }
+  justify-content: center;
+  padding: 0 14px;
+  height: 100%;
 `;
 
 const SearchInput = styled.input`
   flex-grow: 1;
-  padding: 10px 40px;
+  padding: 1px 1px 2px 10px;
   border: none;
   background-color: transparent;
   font-size: 14px;
@@ -55,19 +52,20 @@ const SearchInput = styled.input`
   }
 `;
 
-const VisualSearchIcon = styled.div`
-  position: absolute;
-  right: 10px;
+const VisualSearchIconWrapper = styled.div`
   display: flex;
   align-items: center;
-  svg {
-    fill: #6b6b6b;
-  }
+  justify-content: center;
+  padding: 0 14px;
+  height: 100%;
 `;
 
 const HeaderNav = styled.nav`
-  padding: 10px 20px;
+  padding: 0 20px;
   overflow-x: auto;
+  height: 56px;
+  display: flex;
+  align-items: center;
 
   ul {
     display: flex;
@@ -75,16 +73,21 @@ const HeaderNav = styled.nav`
     margin: 0;
     padding: 0;
     white-space: nowrap;
+    height: 100%;
+    align-items: center;
   }
 
   li {
-    margin-right: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
 
   a {
     text-decoration: none;
     color: #767676;
     font-size: 14px;
+    padding: 0 12px;
     &:hover {
       color: #111;
     }
@@ -100,9 +103,16 @@ const MenuButton = styled.button`
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 24px;
   color: #767676;
-  margin-left: 20px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
 `;
 
 const NavButton = styled.button`
@@ -111,18 +121,23 @@ const NavButton = styled.button`
   cursor: pointer;
   color: #767676;
   font-size: 14px;
-  margin-left: 20px;
+  padding: 0 16px;
   &:hover {
     color: #111;
   }
 `;
 
 const LoginButton = styled(NavButton)`
-  padding: 8px 16px;
-  border: none;
   &:hover {
     color: #111;
   }
+`;
+
+const VerticalLine = styled.div`
+  height: 32px;
+  width: 1px;
+  background-color: #d1d1d1;
+  margin: 0 16px;
 `;
 
 function Header() {
@@ -133,18 +148,26 @@ function Header() {
           <img src={logoSvg} alt="Unsplash Logo" />
         </Logo>
         <SearchWrapper>
-          <SearchIcon>
-            <img src={searchSvg} alt="Search Icon" />
-          </SearchIcon>
+          <SearchIconWrapper>
+            <img src={searchSvg} alt="Search Icon" width="20" height="20" />
+          </SearchIconWrapper>
           <SearchInput type="text" placeholder="사진과 일러스트 검색" />
-          <VisualSearchIcon>
-            <img src={menuSvg} alt="menu Icon" />
-          </VisualSearchIcon>
+          <VisualSearchIconWrapper>
+            <img
+              src={visualSearchSvg}
+              alt="Visual Search Icon"
+              width="20"
+              height="20"
+            />
+          </VisualSearchIconWrapper>
         </SearchWrapper>
         <HeaderRight>
           <NavButton>탐색</NavButton>
+          <VerticalLine />
           <LoginButton>로그인</LoginButton>
-          <MenuButton>☰</MenuButton>
+          <MenuButton>
+            <img src={menuSvg} alt="Menu Icon" />
+          </MenuButton>
         </HeaderRight>
       </TopHeader>
       <HeaderNav>
@@ -158,6 +181,7 @@ function Header() {
           <li>
             <Link to="/unsplash-plus">Unsplash+</Link>
           </li>
+          <VerticalLine />
           <li>
             <Link to="/3d">3D 렌더링</Link>
           </li>
