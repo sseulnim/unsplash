@@ -4,7 +4,7 @@ import styled from "styled-components";
 // SVG 파일들을 import
 import logoSvg from "../assets/logo.svg";
 import searchSvg from "../assets/search.svg";
-import visualSearchSvg from "../assets/visual-search.svg";
+import menuSvg from "../assets/menu.svg";
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -138,7 +138,7 @@ function Header() {
           </SearchIcon>
           <SearchInput type="text" placeholder="사진과 일러스트 검색" />
           <VisualSearchIcon>
-            <img src={visualSearchSvg} alt="Visual Search Icon" />
+            <img src={menuSvg} alt="menu Icon" />
           </VisualSearchIcon>
         </SearchWrapper>
         <HeaderRight>
