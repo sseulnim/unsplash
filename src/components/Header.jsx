@@ -47,6 +47,7 @@ const SearchInput = styled.input`
   border: none;
   background-color: transparent;
   font-size: 14px;
+
   &::placeholder {
     color: #767676;
   }
@@ -88,6 +89,7 @@ const HeaderNav = styled.nav`
     color: #767676;
     font-size: 14px;
     padding: 0 12px;
+
     &:hover {
       color: #111;
     }
@@ -122,6 +124,7 @@ const NavButton = styled.button`
   color: #767676;
   font-size: 14px;
   padding: 0 16px;
+
   &:hover {
     color: #111;
   }
