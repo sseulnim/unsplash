@@ -1,11 +1,10 @@
-import "./App.css";
+import Header from "./components/Header";
 
 function App() {
   return (
     <div className="App">
-      <nav>
-        <ul>{/* <li><Link to="/">Home</Link></li> */}</ul>
-      </nav>
+      <Header />
+      {/* 나머지 앱 내용 */}
     </div>
   );
 }
