@@ -8,7 +8,7 @@ import visualSearchSvg from "../assets/visual_search.svg";
 const HeaderWrapper = styled.header`
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: #fff;
   border-bottom: 1px solid #ddd;
 `;
 
@@ -30,7 +30,7 @@ const SearchWrapper = styled.div`
   height: 40px;
   border-radius: 24px;
   background-color: #ebebeb;
-  overflow: hidden;
+  /* overflow: hidden; */
 `;
 
 const SearchIconWrapper = styled.div`
