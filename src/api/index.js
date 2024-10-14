@@ -1,10 +1,10 @@
-import axios from "axios";
+import apiClient from "./apiClient";
 
-const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_APP_API_URL,
-  headers: {
-    Authorization: `Client-ID ${import.meta.env.VITE_APP_CLIENT_ID}`,
-  },
-});
-
-export default apiClient;
+export const getPhotos = async (query) => {
+  const response = await apiClient.get("/search/photos", {
+    params: {
+      query,
+    },
+  });
+  return response.data;
+};

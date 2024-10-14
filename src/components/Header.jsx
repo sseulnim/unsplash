@@ -46,6 +46,7 @@ const SearchForm = styled.form`
 `;
 
 const SearchInput = styled.input`
+  width: 100%;
   padding: 1px 1px 2px 10px;
   border: none;
   background-color: transparent;
