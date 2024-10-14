@@ -16,8 +16,9 @@ function Search() {
       <h1>검색결과 : {query}</h1>
       {isLoading && <div>로딩중...</div>}
       {error && <div>에러: {error.message}</div>}
+      {/* data.results 배열을 map으로 순회하며 img 태그를 생성 */}
       {data?.results.map((photo) => (
-        <img key={photo.id} src={photo.urls.small} alt={photo.description} />
+        <img key={photo.id} src={photo.urls.regular} alt={photo.description} />
       ))}
     </div>
   );
