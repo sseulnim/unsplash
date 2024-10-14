@@ -1,4 +1,4 @@
-import { getPhotos } from "../../api";
+import { getSearchPhotos } from "../../api/search";
 import { useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
@@ -8,7 +8,7 @@ function Search() {
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["photos", query],
-    queryFn: () => getPhotos(query),
+    queryFn: () => getSearchPhotos(query),
   });
 
   return (
