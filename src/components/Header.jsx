@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logoSvg from "../assets/logo.svg";
 import searchSvg from "../assets/search.svg";
 import menuSvg from "../assets/menu.svg";
 import visualSearchSvg from "../assets/visual_search.svg";
+import { useState } from "react";
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -30,7 +31,6 @@ const SearchWrapper = styled.div`
   height: 40px;
   border-radius: 24px;
   background-color: #ebebeb;
-  /* overflow: hidden; */
 `;
 
 const SearchIconWrapper = styled.div`
@@ -41,8 +41,11 @@ const SearchIconWrapper = styled.div`
   height: 100%;
 `;
 
-const SearchInput = styled.input`
+const SearchForm = styled.form`
   flex-grow: 1;
+`;
+
+const SearchInput = styled.input`
   padding: 1px 1px 2px 10px;
   border: none;
   background-color: transparent;
@@ -144,6 +147,14 @@ const VerticalLine = styled.div`
 `;
 
 function Header() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/search?query=${searchQuery}`);
+  };
+
   return (
     <HeaderWrapper>
       <TopHeader>
@@ -156,7 +167,14 @@ function Header() {
           <SearchIconWrapper>
             <img src={searchSvg} alt="Search Icon" width="20" height="20" />
           </SearchIconWrapper>
-          <SearchInput type="text" placeholder="사진과 일러스트 검색" />
+          <SearchForm onSubmit={handleSearch}>
+            <SearchInput
+              type="text"
+              placeholder="사진과 일러스트 검색"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </SearchForm>
           <VisualSearchIconWrapper>
             <img
               src={visualSearchSvg}
