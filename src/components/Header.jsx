@@ -1,9 +1,111 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logoSvg from "../assets/logo.svg";
 import searchSvg from "../assets/search.svg";
 import menuSvg from "../assets/menu.svg";
 import visualSearchSvg from "../assets/visual_search.svg";
+import { useState } from "react";
+
+function Header() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/search?query=${searchQuery}`);
+  };
+
+  return (
+    <HeaderWrapper>
+      <TopHeader>
+        <Logo>
+          <Link to="/">
+            <img src={logoSvg} alt="Unsplash Logo" />
+          </Link>
+        </Logo>
+        <SearchWrapper>
+          <SearchIconWrapper>
+            <img src={searchSvg} alt="Search Icon" width="20" height="20" />
+          </SearchIconWrapper>
+          <SearchForm onSubmit={handleSearch}>
+            <SearchInput
+              type="text"
+              placeholder="사진과 일러스트 검색"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </SearchForm>
+          <VisualSearchIconWrapper>
+            <img
+              src={visualSearchSvg}
+              alt="Visual Search Icon"
+              width="20"
+              height="20"
+            />
+          </VisualSearchIconWrapper>
+        </SearchWrapper>
+        <HeaderRight>
+          <NavButton>탐색</NavButton>
+          <VerticalLine />
+          <LoginButton>로그인</LoginButton>
+          <MenuButton>
+            <img src={menuSvg} alt="Menu Icon" />
+          </MenuButton>
+        </HeaderRight>
+      </TopHeader>
+      <HeaderNav>
+        <ul>
+          <li>
+            <Link to="/photos">사진</Link>
+          </li>
+          <li>
+            <Link to="/illust">일러스트</Link>
+          </li>
+          <li>
+            <Link to="/unsplash-plus">Unsplash+</Link>
+          </li>
+          <VerticalLine />
+          <li>
+            <Link to="/3d">3D 렌더링</Link>
+          </li>
+          <li>
+            <Link to="/marine">마리</Link>
+          </li>
+          <li>
+            <Link to="/architecture">건축 및 인테리어</Link>
+          </li>
+          <li>
+            <Link to="/experimental">실험적인</Link>
+          </li>
+          <li>
+            <Link to="/film">필름</Link>
+          </li>
+          <li>
+            <Link to="/food-drink">식음료</Link>
+          </li>
+          <li>
+            <Link to="/animals">동물</Link>
+          </li>
+          <li>
+            <Link to="/nature">자연</Link>
+          </li>
+          <li>
+            <Link to="/people">사람</Link>
+          </li>
+          <li>
+            <Link to="/sports">스포츠</Link>
+          </li>
+          <li>
+            <Link to="/travel">여행하다</Link>
+          </li>
+          <li>
+            <Link to="/rising-stars">라이징 스타</Link>
+          </li>
+        </ul>
+      </HeaderNav>
+    </HeaderWrapper>
+  );
+}
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -30,7 +132,6 @@ const SearchWrapper = styled.div`
   height: 40px;
   border-radius: 24px;
   background-color: #ebebeb;
-  /* overflow: hidden; */
 `;
 
 const SearchIconWrapper = styled.div`
@@ -41,8 +142,12 @@ const SearchIconWrapper = styled.div`
   height: 100%;
 `;
 
-const SearchInput = styled.input`
+const SearchForm = styled.form`
   flex-grow: 1;
+`;
+
+const SearchInput = styled.input`
+  width: 100%;
   padding: 1px 1px 2px 10px;
   border: none;
   background-color: transparent;
@@ -142,89 +247,5 @@ const VerticalLine = styled.div`
   background-color: #d1d1d1;
   margin: 0 16px;
 `;
-
-function Header() {
-  return (
-    <HeaderWrapper>
-      <TopHeader>
-        <Logo>
-          <img src={logoSvg} alt="Unsplash Logo" />
-        </Logo>
-        <SearchWrapper>
-          <SearchIconWrapper>
-            <img src={searchSvg} alt="Search Icon" width="20" height="20" />
-          </SearchIconWrapper>
-          <SearchInput type="text" placeholder="사진과 일러스트 검색" />
-          <VisualSearchIconWrapper>
-            <img
-              src={visualSearchSvg}
-              alt="Visual Search Icon"
-              width="20"
-              height="20"
-            />
-          </VisualSearchIconWrapper>
-        </SearchWrapper>
-        <HeaderRight>
-          <NavButton>탐색</NavButton>
-          <VerticalLine />
-          <LoginButton>로그인</LoginButton>
-          <MenuButton>
-            <img src={menuSvg} alt="Menu Icon" />
-          </MenuButton>
-        </HeaderRight>
-      </TopHeader>
-      <HeaderNav>
-        <ul>
-          <li>
-            <Link to="/photos">사진</Link>
-          </li>
-          <li>
-            <Link to="/illust">일러스트</Link>
-          </li>
-          <li>
-            <Link to="/unsplash-plus">Unsplash+</Link>
-          </li>
-          <VerticalLine />
-          <li>
-            <Link to="/3d">3D 렌더링</Link>
-          </li>
-          <li>
-            <Link to="/marine">마리</Link>
-          </li>
-          <li>
-            <Link to="/architecture">건축 및 인테리어</Link>
-          </li>
-          <li>
-            <Link to="/experimental">실험적인</Link>
-          </li>
-          <li>
-            <Link to="/film">필름</Link>
-          </li>
-          <li>
-            <Link to="/food-drink">식음료</Link>
-          </li>
-          <li>
-            <Link to="/animals">동물</Link>
-          </li>
-          <li>
-            <Link to="/nature">자연</Link>
-          </li>
-          <li>
-            <Link to="/people">사람</Link>
-          </li>
-          <li>
-            <Link to="/sports">스포츠</Link>
-          </li>
-          <li>
-            <Link to="/travel">여행하다</Link>
-          </li>
-          <li>
-            <Link to="/rising-stars">라이징 스타</Link>
-          </li>
-        </ul>
-      </HeaderNav>
-    </HeaderWrapper>
-  );
-}
 
 export default Header;
