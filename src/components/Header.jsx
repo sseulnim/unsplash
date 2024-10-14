@@ -148,7 +148,9 @@ function Header() {
     <HeaderWrapper>
       <TopHeader>
         <Logo>
-          <img src={logoSvg} alt="Unsplash Logo" />
+          <Link to="/">
+            <img src={logoSvg} alt="Unsplash Logo" />
+          </Link>
         </Logo>
         <SearchWrapper>
           <SearchIconWrapper>
