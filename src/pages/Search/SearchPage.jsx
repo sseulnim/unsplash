@@ -1,8 +1,8 @@
-import { getInfiniteScrollPhotos, getSearchPhotos } from "../../api/search";
+import { getInfiniteScrollPhotos } from "../../api/search";
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 function Search() {
   const [searchParams] = useSearchParams();
@@ -22,6 +22,8 @@ function Search() {
     getNextPageParam: (lastPage, pages = []) => {
       return lastPage.total_pages > pages.length ? pages.length + 1 : undefined;
     },
+    // select 옵션을 사용하여 데이터를 flat하게 처리 : 모든 페이지의 결과를 펼쳐 하나의 배열로 반환
+    select: (data) => data.pages.flatMap((page) => page.results),
   });
 
   useEffect(() => {
@@ -37,14 +39,16 @@ function Search() {
         {isLoading && <div>로딩중...</div>}
         {error && <div>에러: {error.message}</div>}
         {/* data.results 배열을 map으로 순회하며 img 태그를 생성 */}
-        {data?.pages.map((page) =>
-          page.results.map((photo) => (
+        {data && data.length > 0 ? (
+          data.map((photo) => (
             <img
               key={photo.id}
               src={photo.urls.regular}
               alt={photo.description}
             />
           ))
+        ) : (
+          <div>검색결과가 없습니다.</div>
         )}
       </div>
 
