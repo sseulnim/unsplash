@@ -24,13 +24,20 @@ function Search() {
     },
     // select 옵션을 사용하여 데이터를 flat하게 처리 : 모든 페이지의 결과를 펼쳐 하나의 배열로 반환
     select: (data) => data.pages.flatMap((page) => page.results),
+    enabled: !!query, // query가 있을 때만 쿼리 실행
   });
 
+  // 무한스크롤 영역이 보이면 다음 페이지 로드
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   }, [inView, hasNextPage, fetchNextPage, isFetchingNextPage]);
+
+  // query가 없을 때 검색어를 입력하라는 메시지 표시
+  if (!query) {
+    return <div>검색어를 입력해주세요.</div>;
+  }
 
   return (
     <div>
@@ -39,7 +46,7 @@ function Search() {
         {isLoading && <div>로딩중...</div>}
         {error && <div>에러: {error.message}</div>}
         {/* data.results 배열을 map으로 순회하며 img 태그를 생성 */}
-        {data && data.length > 0 ? (
+        {data?.length > 0 ? (
           data.map((photo) => (
             <img
               key={photo.id}
