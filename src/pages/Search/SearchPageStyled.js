@@ -11,7 +11,7 @@ export const ResultsContainer = styled.div`
 `;
 
 export const ImageItem = styled.div`
-  width: calc(33.3333% - 8px);
+  width: calc(33.3333% - 5.333px); // 여백을 각 열에 균등하게 분배
 `;
 
 export const Image = styled.img`
