@@ -1,8 +1,7 @@
-import { getInfiniteScrollPhotos } from "../../api/search";
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import useInfiniteSearchPhotos from "../../hooks/useInfiniteSearchPhotos";
 import {
   SearchWrapper,
   ResultsContainer,
@@ -25,16 +24,7 @@ function Search() {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useInfiniteQuery({
-    queryKey: ["Photos", query],
-    queryFn: ({ pageParam = 1 }) => getInfiniteScrollPhotos(query, pageParam),
-    getNextPageParam: (lastPage, pages = []) => {
-      return lastPage.total_pages > pages.length ? pages.length + 1 : undefined;
-    },
-    // select 옵션을 사용하여 데이터를 flat하게 처리 : 모든 페이지의 결과를 펼쳐 하나의 배열로 반환
-    select: (data) => data.pages.flatMap((page) => page.results),
-    enabled: !!query, // query가 있을 때만 쿼리 실행
-  });
+  } = useInfiniteSearchPhotos(query);
 
   // 무한스크롤 영역이 보이면 다음 페이지 로드
   useEffect(() => {
@@ -53,17 +43,23 @@ function Search() {
       <h1>검색결과 : {query}</h1>
       <ResultsContainer>
         {isLoading && <LoadingText>로딩중...</LoadingText>}
-        {error && <ErrorText>에러: {error.message}</ErrorText>}
+        {error && (
+          <ErrorText>
+            에러:{" "}
+            {error.message || "이미지를 불러오는 도중 문제가 발생했습니다."}
+          </ErrorText>
+        )}
+        {!isLoading && !error && data?.length === 0 && (
+          <ErrorText>검색결과가 없습니다.</ErrorText>
+        )}
+
         {/* data.results 배열을 map으로 순회하며 img 태그를 생성 */}
-        {data?.length > 0 ? (
+        {data?.length > 0 &&
           data.map((photo) => (
             <ImageItem key={photo.id}>
               <Image src={photo.urls.regular} alt={photo.description} />
             </ImageItem>
-          ))
-        ) : (
-          <ErrorText>검색결과가 없습니다.</ErrorText>
-        )}
+          ))}
       </ResultsContainer>
 
       {/* 무한스크롤 영역 */}
