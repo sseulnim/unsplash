@@ -3,6 +3,15 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import {
+  SearchWrapper,
+  ResultsContainer,
+  ImageItem,
+  Image,
+  LoadingText,
+  ErrorText,
+  ScrollArea,
+} from "./SearchPageStyled";
 
 function Search() {
   const [searchParams] = useSearchParams();
@@ -40,34 +49,32 @@ function Search() {
   }
 
   return (
-    <div>
+    <SearchWrapper>
       <h1>검색결과 : {query}</h1>
-      <div>
-        {isLoading && <div>로딩중...</div>}
-        {error && <div>에러: {error.message}</div>}
+      <ResultsContainer>
+        {isLoading && <LoadingText>로딩중...</LoadingText>}
+        {error && <ErrorText>에러: {error.message}</ErrorText>}
         {/* data.results 배열을 map으로 순회하며 img 태그를 생성 */}
         {data?.length > 0 ? (
           data.map((photo) => (
-            <img
-              key={photo.id}
-              src={photo.urls.regular}
-              alt={photo.description}
-            />
+            <ImageItem key={photo.id}>
+              <Image src={photo.urls.regular} alt={photo.description} />
+            </ImageItem>
           ))
         ) : (
-          <div>검색결과가 없습니다.</div>
+          <ErrorText>검색결과가 없습니다.</ErrorText>
         )}
-      </div>
+      </ResultsContainer>
 
       {/* 무한스크롤 영역 */}
-      <div ref={ref}>
+      <ScrollArea ref={ref}>
         {isFetchingNextPage
           ? "로딩중..."
           : hasNextPage
           ? "더보기"
           : "마지막 페이지"}
-      </div>
-    </div>
+      </ScrollArea>
+    </SearchWrapper>
   );
 }
 
