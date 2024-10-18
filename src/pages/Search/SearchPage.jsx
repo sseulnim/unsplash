@@ -24,6 +24,7 @@ function Search() {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
+    isFetching,
   } = useInfiniteSearchPhotos(query);
 
   // 무한스크롤 영역이 보이면 다음 페이지 로드
@@ -49,7 +50,7 @@ function Search() {
             {error.message || "이미지를 불러오는 도중 문제가 발생했습니다."}
           </ErrorText>
         )}
-        {!isLoading && !error && data?.length === 0 && (
+        {!isFetching && !error && data?.length === 0 && (
           <ErrorText>검색결과가 없습니다.</ErrorText>
         )}
 
@@ -63,13 +64,15 @@ function Search() {
       </ResultsContainer>
 
       {/* 무한스크롤 영역 */}
-      <ScrollArea ref={ref}>
+      <ScrollArea ref={ref} />
+
+      <div>
         {isFetchingNextPage
           ? "로딩중..."
           : hasNextPage
           ? "더보기"
           : "마지막 페이지"}
-      </ScrollArea>
+      </div>
     </SearchWrapper>
   );
 }
