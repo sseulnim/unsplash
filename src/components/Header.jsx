@@ -108,6 +108,11 @@ function Header() {
 }
 
 const HeaderWrapper = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   background-color: #fff;
