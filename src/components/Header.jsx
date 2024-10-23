@@ -108,15 +108,13 @@ function Header() {
 }
 
 const HeaderWrapper = styled.header`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
   display: flex;
   flex-direction: column;
   background-color: #fff;
   border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 `;
 
 const TopHeader = styled.div`
