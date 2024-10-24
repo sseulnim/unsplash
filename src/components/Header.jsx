@@ -110,6 +110,8 @@ function Header() {
 const HeaderWrapper = styled.header`
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 0px;
   background-color: #fff;
   border-bottom: 1px solid #ddd;
   position: sticky;
