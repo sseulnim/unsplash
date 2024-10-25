@@ -17,6 +17,9 @@ import {
 } from "./SearchPageStyled";
 import Button from "../../components/Button";
 import Avatar from "../../components/Avatar";
+import likeSvg from "../../assets/like.svg";
+import plusSvg from "../../assets/plus.svg";
+import arrowDownSvg from "../../assets/arrow-down.svg";
 
 function Search() {
   const [searchParams] = useSearchParams();
@@ -67,8 +70,12 @@ function Search() {
               <Image src={photo.urls.regular} alt={photo.description} />
               <TextWrap>
                 <ButtonWrap>
-                  <Button type="like" altText="좋아요" />
-                  <Button type="plus" altText="추가" />
+                  <Button altText="좋아요">
+                    <img src={likeSvg} alt="좋아요" />
+                  </Button>
+                  <Button altText="추가">
+                    <img src={plusSvg} alt="추가" />
+                  </Button>
                 </ButtonWrap>
                 <AvatarWrap>
                   <Avatar
@@ -78,7 +85,9 @@ function Search() {
                   <span>{photo.user.username}</span>
                 </AvatarWrap>
                 <DownloadButtonWrap>
-                  <Button type="arrowDown" altText="다운로드" />
+                  <Button altText="다운로드">
+                    <img src={arrowDownSvg} alt="다운로드" />
+                  </Button>
                 </DownloadButtonWrap>
               </TextWrap>
             </ImageItem>
