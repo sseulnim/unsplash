@@ -10,19 +10,6 @@ export const ResultsContainer = styled.div`
   gap: 8px;
 `;
 
-export const ImageItem = styled.div`
-  width: calc(33.3333% - 5.333px); // 여백을 각 열에 균등하게 분배
-  position: relative;
-  z-index: 1;
-`;
-
-export const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  aspect-ratio: 1 / 1;
-`;
-
 export const TextWrap = styled.div`
   position: absolute;
   top: 0;
@@ -37,10 +24,24 @@ export const TextWrap = styled.div`
   opacity: 0;
   transition: opacity 0.3s ease;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
+  z-index: 2; /* 이미지 위로 올라오도록 z-index 추가 */
+`;
 
-  &:hover {
+export const ImageItem = styled.div`
+  width: calc(33.3333% - 5.333px); // 여백을 각 열에 균등하게 분배
+  position: relative;
+  z-index: 1;
+
+  &:hover ${TextWrap} {
     opacity: 1;
   }
+`;
+
+export const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
 `;
 
 export const ButtonWrap = styled.div`
