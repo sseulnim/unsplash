@@ -1,3 +1,24 @@
-// 프로필 사진 없으면 이미지 회색 배경으로 노출
-// 프로필 사진 있으면 프로필 사진 노출
-// 프로필 사진 클릭 시 프로필 페이지로 이동
+import styled from "styled-components";
+
+function Avatar({ src, alt }) {
+  return (
+    <AvatarWrapper>
+      <img src={src} alt={alt} />
+    </AvatarWrapper>
+  );
+}
+
+export default Avatar;
+
+const AvatarWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+`;
