@@ -7,10 +7,16 @@ import {
   ResultsContainer,
   ImageItem,
   Image,
+  TextWrap,
+  ButtonWrap,
+  AvatarWrap,
+  DownloadButtonWrap,
   LoadingText,
   ErrorText,
   ScrollArea,
 } from "./SearchPageStyled";
+import Button from "../../components/Button";
+import Avatar from "../../components/Avatar";
 
 function Search() {
   const [searchParams] = useSearchParams();
@@ -59,6 +65,22 @@ function Search() {
           data.map((photo) => (
             <ImageItem key={photo.id}>
               <Image src={photo.urls.regular} alt={photo.description} />
+              <TextWrap>
+                <ButtonWrap>
+                  <Button type="like" altText="좋아요" />
+                  <Button type="plus" altText="추가" />
+                </ButtonWrap>
+                <AvatarWrap>
+                  <Avatar
+                    src={photo.user.profile_image.small}
+                    alt={photo.user.username}
+                  />
+                  <span>{photo.user.username}</span>
+                </AvatarWrap>
+                <DownloadButtonWrap>
+                  <Button type="arrowDown" altText="다운로드" />
+                </DownloadButtonWrap>
+              </TextWrap>
             </ImageItem>
           ))}
       </ResultsContainer>
