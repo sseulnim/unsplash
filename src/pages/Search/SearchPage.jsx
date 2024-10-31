@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import useInfiniteSearchPhotos from "../../hooks/useInfiniteSearchPhotos";
 import {
@@ -17,6 +17,7 @@ import {
 } from "./SearchPageStyled";
 import Button from "../../components/Button";
 import Avatar from "../../components/Avatar";
+import Modal from "../../components/Modal";
 import likeSvg from "../../assets/like.svg";
 import plusSvg from "../../assets/plus.svg";
 import arrowDownSvg from "../../assets/arrow-down.svg";
@@ -25,6 +26,8 @@ function Search() {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
   const { ref, inView } = useInView(); // Intersection Observer 훅
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
     data,
@@ -42,6 +45,16 @@ function Search() {
       fetchNextPage();
     }
   }, [inView, hasNextPage, fetchNextPage, isFetchingNextPage]);
+
+  const openModal = (image) => {
+    setSelectedImage(image);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedImage(null);
+    setIsModalOpen(false);
+  };
 
   // query가 없을 때 검색어를 입력하라는 메시지 표시
   if (!query) {
@@ -66,7 +79,7 @@ function Search() {
         {/* data.results 배열을 map으로 순회하며 img 태그를 생성 */}
         {data?.length > 0 &&
           data.map((photo) => (
-            <ImageItem key={photo.id}>
+            <ImageItem key={photo.id} onClick={() => openModal(photo)}>
               <Image src={photo.urls.regular} alt={photo.description} />
               <TextWrap>
                 <ButtonWrap>
@@ -104,6 +117,13 @@ function Search() {
           ? "더보기"
           : "마지막 페이지"}
       </div>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        imageUrl={selectedImage?.urls.regular}
+        imageAlt={selectedImage?.description}
+      />
     </SearchWrapper>
   );
 }
