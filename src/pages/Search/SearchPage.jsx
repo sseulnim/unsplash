@@ -61,7 +61,7 @@ function Search() {
   // 모달 열기
   const openModal = (image) => {
     setSelectedImage(image);
-    navigate(`/search${"?query=" + query + "&photoId=" + image.id}`, {
+    navigate(`/search?query=${query}&photoId=${image.id}`, {
       replace: false,
     });
   };
