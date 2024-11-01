@@ -1,4 +1,4 @@
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import useInfiniteSearchPhotos from "../../hooks/useInfiniteSearchPhotos";
