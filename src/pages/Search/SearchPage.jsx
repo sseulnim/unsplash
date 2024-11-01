@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import useInfiniteSearchPhotos from "../../hooks/useInfiniteSearchPhotos";
@@ -23,11 +23,10 @@ import plusSvg from "../../assets/plus.svg";
 import arrowDownSvg from "../../assets/arrow-down.svg";
 
 function Search() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("query");
   const { ref, inView } = useInView(); // Intersection Observer 훅
   const photoId = searchParams.get("photoId");
-  const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState(null);
 
   const {
@@ -49,9 +48,8 @@ function Search() {
 
   // 선택된 이미지를 설정하고 모달을 열기
   useEffect(() => {
-    if (photoId && data?.length > 0) {
+    if (photoId && data) {
       const image = data.find((photo) => photo.id === photoId);
-
       setSelectedImage(image || null);
     } else {
       setSelectedImage(null);
@@ -60,16 +58,13 @@ function Search() {
 
   // 모달 열기
   const openModal = (image) => {
-    setSelectedImage(image);
-    navigate(`/search?query=${query}&photoId=${image.id}`, {
-      replace: false,
-    });
+    setSearchParams({ query, photoId: image.id });
   };
 
   // 모달 닫기
   const closeModal = () => {
+    setSearchParams({ query });
     setSelectedImage(null);
-    navigate(`/search${"?query=" + query}`);
   };
 
   // query가 없을 때 검색어를 입력하라는 메시지 표시
