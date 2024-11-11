@@ -2,6 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { getPhotoById } from "../api/search";
+import likeIcon from "../assets/like.svg";
+import photoIcon from "../assets/plus.svg";
+import downloadIcon from "../assets/arrow-down.svg";
 
 function Modal({ isOpen, onClose, photoId }) {
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -27,30 +30,54 @@ function Modal({ isOpen, onClose, photoId }) {
           <LoadingText>Loading...</LoadingText>
         ) : (
           <>
+            {!isFullScreen && (
+              <TopBar>
+                <BrandInfo>
+                  <Avatar
+                    src={image.user.profile_image.medium}
+                    alt={image.user.name}
+                  />
+                  <BrandText>
+                    <h3>{image.user.name}</h3>
+                    <p>{image.user.bio || "정보가 없습니다."}</p>
+                  </BrandText>
+                </BrandInfo>
+                <ButtonGroup>
+                  <LikeButton>
+                    <img src={likeIcon} alt="좋아요" />
+                  </LikeButton>
+                  <AddPhotoButton>
+                    <img src={photoIcon} alt="추가" />
+                  </AddPhotoButton>
+                  <DownloadButton>
+                    <img src={downloadIcon} alt="다운로드" />
+                  </DownloadButton>
+                </ButtonGroup>
+              </TopBar>
+            )}
+
             <ModalImage
               src={image.urls.regular}
               alt={image.alt_description}
               onClick={() => setIsFullScreen(!isFullScreen)}
               isFullScreen={isFullScreen}
             />
+
             {!isFullScreen && (
               <>
-                <ImageInfo>
-                  <AuthorInfo>
-                    <Avatar
-                      src={image.user.profile_image.medium}
-                      alt={image.user.name}
-                    />
-                    <h3>{image.user.name}</h3>
-                  </AuthorInfo>
-                  <Description>
-                    {image.description || "설명이 없습니다."}
-                  </Description>
-                  <Stats>
-                    <StatItem>조회수: {image.views}</StatItem>
-                    <StatItem>다운로드: {image.downloads}</StatItem>
-                  </Stats>
-                </ImageInfo>
+                <BottomBar>
+                  <StatInfo>
+                    <StatItem>조회수: {image.views.toLocaleString()}</StatItem>
+                    <StatItem>
+                      다운로드: {image.downloads.toLocaleString()}
+                    </StatItem>
+                  </StatInfo>
+                  <ActionButtons>
+                    <IconButton>🔗 공유</IconButton>
+                    <IconButton>ℹ️ 정보</IconButton>
+                    <IconButton>:</IconButton>
+                  </ActionButtons>
+                </BottomBar>
                 <CloseButton onClick={onClose}>X</CloseButton>
               </>
             )}
@@ -62,11 +89,6 @@ function Modal({ isOpen, onClose, photoId }) {
 }
 
 export default Modal;
-
-const LoadingText = styled.p`
-  color: white;
-  text-align: center;
-`;
 
 const Overlay = styled.div`
   position: fixed;
@@ -95,48 +117,122 @@ const ModalContent = styled.div`
 const ModalImage = styled.img`
   width: ${({ isFullScreen }) => (isFullScreen ? "100vw" : "100%")};
   height: ${({ isFullScreen }) => (isFullScreen ? "100vh" : "auto")};
-  object-fit: ${({ isFullScreen }) => (isFullScreen ? "contain" : "cover")};
+  object-fit: contain;
   cursor: pointer;
-  transition: width 0.3s ease, height 0.3s ease;
 `;
 
-const ImageInfo = styled.div`
-  color: 10px;
+const LoadingText = styled.p`
+  color: white;
+  text-align: center;
 `;
 
-const AuthorInfo = styled.div`
+const TopBar = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const BrandInfo = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-
-  h3 {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: 500;
-  }
 `;
 
 const Avatar = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  margin-right: 10px;
 `;
 
-const Description = styled.p`
-  font-size: 1rem;
-  color: #333;
+const BrandText = styled.div`
+  h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: gray;
+  }
 `;
 
-const Stats = styled.div`
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const LikeButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 5px 10px;
+  cursor: pointer;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+`;
+
+const AddPhotoButton = styled(LikeButton)``;
+
+const DownloadButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
+  cursor: pointer;
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+`;
+
+const BottomBar = styled.div`
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  align-items: center;
+`;
+
+const StatInfo = styled.div`
+  font-size: 0.9rem;
   color: gray;
+  display: flex;
+  gap: 20px;
 `;
 
 const StatItem = styled.span`
-  font-size: 14px;
+  font-size: 0.9rem;
+`;
+
+const ActionButtons = styled.div`
+  display: flex;
+  gap: 10px;
+`;
+
+const IconButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
 `;
 
 const CloseButton = styled.button`
@@ -148,5 +244,5 @@ const CloseButton = styled.button`
   font-size: 24px;
   color: #fff;
   cursor: pointer;
-  display: ${({ isFullScreen }) => (isFullScreen ? "none" : "block")};
+  /* display: ${({ isFullScreen }) => (isFullScreen ? "none" : "block")}; */
 `;
