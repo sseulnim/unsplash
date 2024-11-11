@@ -134,6 +134,7 @@ function Search() {
         <Modal
           isOpen={Boolean(selectedImage)}
           onClose={closeModal}
+          photoId={selectedImage?.id}
           imageUrl={selectedImage?.urls.regular}
           imageAlt={selectedImage?.description}
         >

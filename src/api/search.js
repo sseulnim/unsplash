@@ -21,3 +21,9 @@ export const getInfiniteScrollPhotos = async (query, pageParam = 1) => {
   });
   return response.data;
 };
+
+// 이미지 상세 정보 조회 함수
+export const getPhotoById = async (photoId) => {
+  const response = await apiClient.get(`/photos/${photoId}`);
+  return response.data;
+};
