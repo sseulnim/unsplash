@@ -3,8 +3,14 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { getPhotoById } from "../api/search";
 import likeIcon from "../assets/like.svg";
-import photoIcon from "../assets/plus.svg";
+import plusIcon from "../assets/plus.svg";
 import downloadIcon from "../assets/arrow-down.svg";
+import closeIcon from "../assets/close.svg";
+import shareIcon from "../assets/share.svg";
+import infoIcon from "../assets/info.svg";
+import moreIcon from "../assets/more.svg";
+import arrowLeftIcon from "../assets/arrow-left.svg";
+import arrowRightIcon from "../assets/arrow-right.svg";
 
 function Modal({ isOpen, onClose, photoId }) {
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -43,14 +49,14 @@ function Modal({ isOpen, onClose, photoId }) {
                   </BrandText>
                 </BrandInfo>
                 <ButtonGroup>
-                  <LikeButton>
-                    <img src={likeIcon} alt="좋아요" />
-                  </LikeButton>
-                  <AddPhotoButton>
-                    <img src={photoIcon} alt="추가" />
-                  </AddPhotoButton>
+                  <IconButton>
+                    <img src={likeIcon} alt="Like" />
+                  </IconButton>
+                  <IconButton>
+                    <img src={plusIcon} alt="Add to Collection" />
+                  </IconButton>
                   <DownloadButton>
-                    <img src={downloadIcon} alt="다운로드" />
+                    <img src={downloadIcon} alt="Download" />
                   </DownloadButton>
                 </ButtonGroup>
               </TopBar>
@@ -73,8 +79,14 @@ function Modal({ isOpen, onClose, photoId }) {
                     </StatItem>
                   </StatInfo>
                   <ActionButtons>
-                    <IconButton>🔗 공유</IconButton>
-                    <IconButton>ℹ️ 정보</IconButton>
+                    <IconButton>
+                      <img src={shareIcon} alt="Share" />
+                      공유
+                    </IconButton>
+                    <IconButton>
+                      <img src={infoIcon} alt="Info" />
+                      정보
+                    </IconButton>
                     <IconButton>:</IconButton>
                   </ActionButtons>
                 </BottomBar>
