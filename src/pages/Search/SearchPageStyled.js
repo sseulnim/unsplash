@@ -21,10 +21,11 @@ export const TextWrap = styled.div`
   justify-content: space-between;
   padding: 10px;
   box-sizing: border-box;
+  visibility: hidden;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: visibility 0s ease, opacity 0.3s ease;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
-  z-index: 2; /* 이미지 위로 올라오도록 z-index 추가 */
+  z-index: 2;
 `;
 
 export const ImageItem = styled.div`
@@ -33,6 +34,7 @@ export const ImageItem = styled.div`
   z-index: 1;
 
   &:hover ${TextWrap} {
+    visibility: visible;
     opacity: 1;
   }
 `;
@@ -48,8 +50,36 @@ export const ButtonWrap = styled.div`
   display: flex;
   gap: 8px;
   position: absolute;
-  top: 10px;
-  right: 10px; /* 오른쪽 상단 정렬 */
+  top: 30px;
+  right: 30px; /* 오른쪽 상단 정렬 */
+`;
+
+export const Button = styled.button`
+  width: 58px;
+  height: 47px;
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+
+  img {
+    width: 24px;
+    height: 24px;
+    color: #555555;
+    transition: fill 0.3s ease;
+  }
+
+  &:hover {
+    background-color: #ffffff;
+
+    img {
+      fill: #111111;
+    }
+  }
 `;
 
 export const AvatarWrap = styled.div`
@@ -57,15 +87,15 @@ export const AvatarWrap = styled.div`
   align-items: center;
   gap: 8px;
   position: absolute;
-  bottom: 10px;
-  left: 10px; /* 왼쪽 하단 정렬 */
+  bottom: 30px;
+  left: 30px; /* 왼쪽 하단 정렬 */
   color: white;
 `;
 
 export const DownloadButtonWrap = styled.div`
   position: absolute;
-  bottom: 10px;
-  right: 10px; /* 오른쪽 하단 정렬 */
+  bottom: 30px;
+  right: 30px; /* 오른쪽 하단 정렬 */
 `;
 
 export const LoadingText = styled.div`
