@@ -17,7 +17,7 @@ import {
 } from "./SearchPageStyled";
 import Button from "../../components/Button";
 import Avatar from "../../components/Avatar";
-import Modal from "../../components/Modal";
+import Modal from "../Modal/Modal";
 import likeSvg from "../../assets/like.svg";
 import plusSvg from "../../assets/plus.svg";
 import arrowDownSvg from "../../assets/arrow-down.svg";
