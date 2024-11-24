@@ -95,11 +95,9 @@ function Search() {
               <TextWrap>
                 <ButtonWrap>
                   <Button altText="좋아요">
-                    {/* <img src={likeSvg} alt="좋아요" /> */}
                     <LikeButton />
                   </Button>
                   <Button altText="추가">
-                    {/* <img src={plusSvg} alt="추가" /> */}
                     <PlusButton />
                   </Button>
                 </ButtonWrap>
@@ -112,7 +110,6 @@ function Search() {
                 </AvatarWrap>
                 <DownloadButtonWrap>
                   <Button altText="다운로드">
-                    {/* <img src={arrowDownSvg} alt="다운로드" /> */}
                     <ArrowDownButton />
                   </Button>
                 </DownloadButtonWrap>

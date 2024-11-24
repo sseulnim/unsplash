@@ -23,7 +23,6 @@ export const TextWrap = styled.div`
   box-sizing: border-box;
   visibility: hidden;
   opacity: 0;
-  /* transition: visibility 0s ease, opacity 0.3s ease; */
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
   z-index: 2;
 `;
@@ -61,7 +60,20 @@ export const AvatarWrap = styled.div`
   position: absolute;
   bottom: 20px;
   left: 20px; /* 왼쪽 하단 정렬 */
-  color: white;
+  color: #fff;
+  cursor: pointer;
+
+  span {
+    color: #fff;
+    transition: all 0.1s ease-in-out;
+  }
+
+  &:hover {
+    span {
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
 `;
 
 export const DownloadButtonWrap = styled.div`
