@@ -12,23 +12,29 @@ function Button({ children, altText, ...props }) {
 export default Button;
 
 const ButtonWrapper = styled.button`
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 40px;
-  height: 40px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
-  /* border-radius: 50%; */
-  transition: background-color 0.3s ease;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  height: 32px;
+  background-color: #f5f5f5fa;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 0 11px;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 1);
+    background-color: #fff;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: #555;
+  }
+
+  &:hover svg {
+    fill: #111;
   }
 `;
 

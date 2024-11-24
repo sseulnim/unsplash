@@ -6,20 +6,22 @@ export const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  display: flex;
+  background: rgba(0, 0, 0, 0.4);
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   z-index: 1000;
+  overflow-y: auto;
 `;
 
 export const ModalContent = styled.div`
-  position: relative;
-  width: fit-content;
-  max-width: 90%;
+  /* position: relative; */
+  /* width: fit-content; */
+  /* max-width: 90%; */
+  margin: 16px 120px 0;
   background: white;
-  border-radius: 4px;
-  overflow: hidden;
+  border-radius: 8px;
+  /* overflow: hidden; */
 `;
 
 export const LoadingText = styled.div`
@@ -30,6 +32,9 @@ export const LoadingText = styled.div`
 `;
 
 export const Header = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -200,24 +205,21 @@ export const NavButton = styled.button`
 
 export const CloseButton = styled.button`
   position: fixed;
-  top: 20px;
-  left: 20px;
+  top: 5px;
+  left: 5px;
   background: none;
   border: none;
   padding: 8px;
   cursor: pointer;
   z-index: 1100;
   opacity: 0.8;
-  transition: opacity 0.2s;
 
   &:hover {
     opacity: 1;
   }
 
   img {
-    width: 24px;
-    height: 24px;
-    filter: invert(1);
+    width: 15px;
   }
 `;
 
@@ -235,8 +237,7 @@ export const FullScreenImage = styled.div`
   cursor: zoom-out;
 
   img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    width: 100%;
+    object-fit: unset;
   }
 `;

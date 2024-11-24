@@ -18,9 +18,9 @@ import {
 import Button from "../../components/Button";
 import Avatar from "../../components/Avatar";
 import Modal from "../Modal/Modal";
-import likeSvg from "../../assets/like.svg";
-import plusSvg from "../../assets/plus.svg";
-import arrowDownSvg from "../../assets/arrow-down.svg";
+import LikeButton from "../../components/buttons/LikeButton";
+import PlusButton from "../../components/buttons/PlusButton";
+import ArrowDownButton from "../../components/buttons/ArrowDownButton";
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -95,10 +95,12 @@ function Search() {
               <TextWrap>
                 <ButtonWrap>
                   <Button altText="좋아요">
-                    <img src={likeSvg} alt="좋아요" />
+                    {/* <img src={likeSvg} alt="좋아요" /> */}
+                    <LikeButton />
                   </Button>
                   <Button altText="추가">
-                    <img src={plusSvg} alt="추가" />
+                    {/* <img src={plusSvg} alt="추가" /> */}
+                    <PlusButton />
                   </Button>
                 </ButtonWrap>
                 <AvatarWrap>
@@ -110,7 +112,8 @@ function Search() {
                 </AvatarWrap>
                 <DownloadButtonWrap>
                   <Button altText="다운로드">
-                    <img src={arrowDownSvg} alt="다운로드" />
+                    {/* <img src={arrowDownSvg} alt="다운로드" /> */}
+                    <ArrowDownButton />
                   </Button>
                 </DownloadButtonWrap>
               </TextWrap>
