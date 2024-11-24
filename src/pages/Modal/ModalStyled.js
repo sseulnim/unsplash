@@ -1,37 +1,32 @@
 import styled from "styled-components";
 
-export const Overlay = styled.div`
+export const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   z-index: 1000;
   overflow-y: auto;
 `;
 
-export const ModalContent = styled.div`
-  /* position: relative; */
-  /* width: fit-content; */
-  /* max-width: 90%; */
+export const ModalContainer = styled.div`
+  position: relative;
   margin: 16px 120px 0;
-  background: white;
-  border-radius: 8px;
-  /* overflow: hidden; */
+  background: #fff;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
 `;
 
-export const LoadingText = styled.div`
+export const ModalLoadingText = styled.div`
   color: #111;
   font-size: 14px;
   text-align: center;
   padding: 20px;
 `;
 
-export const Header = styled.div`
+export const ModalHeader = styled.div`
   position: sticky;
   top: 0;
   z-index: 1;
@@ -39,15 +34,15 @@ export const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  background: white;
+  background: #fff;
 `;
 
-export const UserInfo = styled.div`
+export const ModalUserInfo = styled.div`
   display: flex;
   align-items: center;
 `;
 
-export const AvatarLink = styled.a`
+export const ModalAvatarLink = styled.a`
   display: flex;
   align-items: center;
   gap: 12px;
@@ -59,40 +54,40 @@ export const AvatarLink = styled.a`
   }
 `;
 
-export const UserDetails = styled.div`
+export const ModalUserDetails = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const Username = styled.span`
+export const ModalUsername = styled.span`
   font-size: 15px;
   color: #111;
   font-weight: 500;
 `;
 
-export const UserHandle = styled.span`
+export const ModalUserHandle = styled.span`
   font-size: 14px;
   color: #767676;
 `;
 
-export const ActionButtons = styled.div`
+export const ModalActionButtons = styled.div`
   display: flex;
   gap: 8px;
   align-items: center;
 `;
 
-export const Button = styled.button`
-  background: white;
+export const ModalButton = styled.button`
+  background: #fff;
   border: 1px solid #d1d1d1;
   border-radius: 4px;
-  padding: 8px;
+  padding: 0 11px;
   height: 32px;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 14px;
-  color: #111;
+  color: #767676;
   transition: all 0.2s;
 
   &:hover {
@@ -100,18 +95,16 @@ export const Button = styled.button`
   }
 
   img {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 `;
 
-export const LikeButton = styled(Button)``;
+export const ModalLikeButton = styled(ModalButton)``;
+export const ModalCollectButton = styled(ModalButton)``;
+export const ModalDownloadButton = styled(ModalButton)``;
 
-export const CollectButton = styled(Button)``;
-
-export const DownloadButton = styled(Button)``;
-
-export const ZoomButton = styled.button`
+export const ModalZoomButton = styled.button`
   position: absolute;
   top: 12px;
   right: 12px;
@@ -129,7 +122,7 @@ export const ZoomButton = styled.button`
   z-index: 10;
 
   &:hover {
-    background: white;
+    background: #fff;
   }
 
   img {
@@ -138,15 +131,15 @@ export const ZoomButton = styled.button`
   }
 `;
 
-export const ImageContainer = styled.div`
+export const ModalImageContainer = styled.div`
   position: relative;
   padding: 24px 48px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: #fff;
 
-  &:hover ${ZoomButton} {
+  &:hover ${ModalZoomButton} {
     opacity: 1;
   }
 `;
@@ -160,15 +153,15 @@ export const ModalImage = styled.img`
   cursor: zoom-in;
 `;
 
-export const Footer = styled.div`
+export const ModalFooter = styled.div`
   padding: 12px 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
+  background: #fff;
 `;
 
-export const Stats = styled.div`
+export const ModalStats = styled.div`
   display: flex;
   gap: 16px;
   font-size: 14px;
@@ -179,7 +172,7 @@ export const Stats = styled.div`
   }
 `;
 
-export const NavButton = styled.button`
+export const ModalNavButton = styled.button`
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
@@ -203,7 +196,7 @@ export const NavButton = styled.button`
   }
 `;
 
-export const CloseButton = styled.button`
+export const ModalCloseButton = styled.button`
   position: fixed;
   top: 5px;
   left: 5px;
@@ -223,7 +216,7 @@ export const CloseButton = styled.button`
   }
 `;
 
-export const FullScreenImage = styled.div`
+export const ModalFullScreenImage = styled.div`
   position: fixed;
   top: 0;
   left: 0;

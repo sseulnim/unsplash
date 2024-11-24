@@ -2,28 +2,28 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState, useEffect } from "react";
 import { getPhotoById } from "../../api/search";
 import {
-  Overlay,
-  ModalContent,
-  CloseButton,
-  ImageContainer,
+  ModalOverlay,
+  ModalContainer,
+  ModalLoadingText,
+  ModalHeader,
+  ModalUserInfo,
+  ModalAvatarLink,
+  ModalUserDetails,
+  ModalUsername,
+  ModalUserHandle,
+  ModalActionButtons,
+  ModalButton,
+  ModalLikeButton,
+  ModalCollectButton,
+  ModalDownloadButton,
+  ModalZoomButton,
+  ModalImageContainer,
   ModalImage,
-  Header,
-  Footer,
-  UserInfo,
-  ActionButtons,
-  Button,
-  LikeButton,
-  CollectButton,
-  DownloadButton,
-  NavButton,
-  Stats,
-  LoadingText,
-  FullScreenImage,
-  ZoomButton,
-  AvatarLink,
-  UserDetails,
-  Username,
-  UserHandle,
+  ModalFooter,
+  ModalStats,
+  ModalNavButton,
+  ModalCloseButton,
+  ModalFullScreenImage,
 } from "./ModalStyled";
 import Avatar from "../../components/Avatar";
 
@@ -37,8 +37,8 @@ import closeIcon from "../../assets/close.svg";
 import shareIcon from "../../assets/share.svg";
 import infoIcon from "../../assets/info.svg";
 import moreIcon from "../../assets/more.svg";
-import ZoomIn from "../../assets/zoom-in.svg";
-import ZoomOut from "../../assets/zoom-out.svg";
+import zoomInIcon from "../../assets/zoom-in.svg";
+import zoomOutIcon from "../../assets/zoom-out.svg";
 
 function Modal({ isOpen, onClose, photoId, onPrev, onNext }) {
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -76,92 +76,95 @@ function Modal({ isOpen, onClose, photoId, onPrev, onNext }) {
   if (!isOpen || !photoId) return null;
 
   return (
-    <Overlay onClick={handleOverlayClick} isFullScreen={isFullScreen}>
-      <CloseButton onClick={onClose}>
+    <ModalOverlay onClick={handleOverlayClick}>
+      <ModalCloseButton onClick={onClose}>
         <img src={closeIcon} alt="Close" />
-      </CloseButton>
+      </ModalCloseButton>
 
-      <NavButton direction="prev" onClick={onPrev}>
+      <ModalNavButton direction="prev" onClick={onPrev}>
         <img src={arrowLeftIcon} alt="Previous" />
-      </NavButton>
+      </ModalNavButton>
 
-      <ModalContent onClick={(e) => e.stopPropagation()}>
+      <ModalContainer onClick={(e) => e.stopPropagation()}>
         {isLoading ? (
-          <LoadingText>Loading...</LoadingText>
+          <ModalLoadingText>Loading...</ModalLoadingText>
         ) : (
           <>
-            <Header>
-              <UserInfo>
-                <AvatarLink href={`/@${image.user.username}`}>
+            <ModalHeader>
+              <ModalUserInfo>
+                <ModalAvatarLink href={`/@${image.user.username}`}>
                   <Avatar
                     src={image.user.profile_image.medium}
                     alt={image.user.name}
                   />
-                  <UserDetails>
-                    <Username>{image.user.name}</Username>
-                    <UserHandle>{image.user.username}</UserHandle>
-                  </UserDetails>
-                </AvatarLink>
-              </UserInfo>
-              <ActionButtons>
-                <LikeButton>
+                  <ModalUserDetails>
+                    <ModalUsername>{image.user.name}</ModalUsername>
+                    <ModalUserHandle>@{image.user.username}</ModalUserHandle>
+                  </ModalUserDetails>
+                </ModalAvatarLink>
+              </ModalUserInfo>
+              <ModalActionButtons>
+                <ModalLikeButton>
                   <img src={likeIcon} alt="Like" />
-                </LikeButton>
-                <CollectButton>
+                </ModalLikeButton>
+                <ModalCollectButton>
                   <img src={plusIcon} alt="Add to Collection" />
-                </CollectButton>
-                <DownloadButton>
+                </ModalCollectButton>
+                <ModalDownloadButton>
                   <span>다운로드</span>
                   <img src={downloadIcon} alt="Download" />
-                </DownloadButton>
-              </ActionButtons>
-            </Header>
+                </ModalDownloadButton>
+              </ModalActionButtons>
+            </ModalHeader>
 
-            <ImageContainer>
-              <ZoomButton onClick={() => setIsFullScreen(!isFullScreen)}>
-                <img src={isFullScreen ? ZoomOut : ZoomIn} alt="Toggle zoom" />
-              </ZoomButton>
+            <ModalImageContainer>
+              <ModalZoomButton onClick={() => setIsFullScreen(!isFullScreen)}>
+                <img
+                  src={isFullScreen ? zoomOutIcon : zoomInIcon}
+                  alt="Toggle zoom"
+                />
+              </ModalZoomButton>
               <ModalImage
                 src={isFullScreen ? image.urls.full : image.urls.regular}
                 alt={image.alt_description}
                 onClick={() => setIsFullScreen(true)}
               />
-            </ImageContainer>
+            </ModalImageContainer>
 
-            <Footer>
-              <Stats>
+            <ModalFooter>
+              <ModalStats>
                 <span>조회수 {image.views?.toLocaleString()}</span>
                 <span>·</span>
                 <span>다운로드 {image.downloads?.toLocaleString()}</span>
-              </Stats>
-              <ActionButtons>
-                <Button>
+              </ModalStats>
+              <ModalActionButtons>
+                <ModalButton>
                   <img src={shareIcon} alt="Share" />
                   공유
-                </Button>
-                <Button>
+                </ModalButton>
+                <ModalButton>
                   <img src={infoIcon} alt="Info" />
                   정보
-                </Button>
-                <Button>
+                </ModalButton>
+                <ModalButton>
                   <img src={moreIcon} alt="More" />
-                </Button>
-              </ActionButtons>
-            </Footer>
+                </ModalButton>
+              </ModalActionButtons>
+            </ModalFooter>
           </>
         )}
-      </ModalContent>
+      </ModalContainer>
 
-      <NavButton direction="next" onClick={onNext}>
+      <ModalNavButton direction="next" onClick={onNext}>
         <img src={arrowRightIcon} alt="Next" />
-      </NavButton>
+      </ModalNavButton>
 
       {isFullScreen && (
-        <FullScreenImage onClick={() => setIsFullScreen(false)}>
+        <ModalFullScreenImage onClick={() => setIsFullScreen(false)}>
           <img src={image.urls.full} alt={image.alt_description} />
-        </FullScreenImage>
+        </ModalFullScreenImage>
       )}
-    </Overlay>
+    </ModalOverlay>
   );
 }
 
