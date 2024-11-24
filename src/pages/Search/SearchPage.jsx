@@ -2,25 +2,12 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import useInfiniteSearchPhotos from "../../hooks/useInfiniteSearchPhotos";
-import {
-  SearchWrapper,
-  ResultsContainer,
-  ImageItem,
-  Image,
-  TextWrap,
-  ButtonWrap,
-  AvatarWrap,
-  DownloadButtonWrap,
-  LoadingText,
-  ErrorText,
-  ScrollArea,
-} from "./SearchPageStyled";
-import Button from "../../components/Button";
-import Avatar from "../../components/Avatar";
+import { SearchWrapper, ResultsContainer } from "./SearchPageStyled";
+import ImageCard from "../../components/common/ImageCard/ImageCard";
 import Modal from "../Modal/Modal";
-import LikeButton from "../../components/buttons/LikeButton";
-import PlusButton from "../../components/buttons/PlusButton";
-import ArrowDownButton from "../../components/buttons/ArrowDownButton";
+import LoadingState from "../../components/common/LoadingState/index";
+import ErrorState from "../../components/common/ErrorState/index";
+import LoadMoreIndicator from "../../components/common/LoadMoreIndicator/index";
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -69,65 +56,37 @@ function Search() {
 
   // query가 없을 때 검색어를 입력하라는 메시지 표시
   if (!query) {
-    return <div>검색어를 입력해주세요.</div>;
+    return <ErrorState message="검색어를 입력해주세요." />;
   }
 
   return (
     <SearchWrapper>
       <h1>검색결과 : {query}</h1>
       <ResultsContainer>
-        {isLoading && <LoadingText>로딩중...</LoadingText>}
+        {isLoading && <LoadingState />}
         {error && (
-          <ErrorText>
-            에러:
-            {error.message || "이미지를 불러오는 도중 문제가 발생했습니다."}
-          </ErrorText>
+          <ErrorState
+            message={
+              error.message || "이미지를 불러오는 도중 문제가 발생했습니다."
+            }
+          />
         )}
         {!isFetching && !error && data?.length === 0 && (
-          <ErrorText>검색결과가 없습니다.</ErrorText>
+          <ErrorState message="검색결과가 없습니다." />
         )}
 
-        {/* data.results 배열을 map으로 순회하며 img 태그를 생성 */}
         {data?.length > 0 &&
           data.map((photo) => (
-            <ImageItem key={photo.id} onClick={() => openModal(photo)}>
-              <Image src={photo.urls.regular} alt={photo.description} />
-              <TextWrap>
-                <ButtonWrap>
-                  <Button altText="좋아요">
-                    <LikeButton />
-                  </Button>
-                  <Button altText="추가">
-                    <PlusButton />
-                  </Button>
-                </ButtonWrap>
-                <AvatarWrap>
-                  <Avatar
-                    src={photo.user.profile_image.small}
-                    alt={photo.user.username}
-                  />
-                  <span>{photo.user.username}</span>
-                </AvatarWrap>
-                <DownloadButtonWrap>
-                  <Button altText="다운로드">
-                    <ArrowDownButton />
-                  </Button>
-                </DownloadButtonWrap>
-              </TextWrap>
-            </ImageItem>
+            <ImageCard key={photo.id} photo={photo} onClick={openModal} />
           ))}
       </ResultsContainer>
 
       {/* 무한스크롤 영역 */}
-      <ScrollArea ref={ref} />
-
-      <div>
-        {isFetchingNextPage
-          ? "로딩중..."
-          : hasNextPage
-          ? "더보기"
-          : "마지막 페이지"}
-      </div>
+      <div ref={ref} />
+      <LoadMoreIndicator
+        isFetchingNextPage={isFetchingNextPage}
+        hasNextPage={hasNextPage}
+      />
 
       {/* 모달 */}
       {selectedImage && (
