@@ -1,5 +1,19 @@
 import styled from "styled-components";
 
+export const ImageCardWrapper = styled.div`
+  width: calc(33.3333% - 5.333px);
+  position: relative;
+  z-index: 1;
+`;
+
+export const Image = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+  cursor: zoom-in;
+`;
+
 export const Overlay = styled.div`
   position: absolute;
   top: 0;
@@ -15,24 +29,11 @@ export const Overlay = styled.div`
   opacity: 0;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
   z-index: 2;
-`;
 
-export const ImageCardWrapper = styled.div`
-  width: calc(33.3333% - 5.333px);
-  position: relative;
-  z-index: 1;
-
-  &:hover ${Overlay} {
+  ${ImageCardWrapper}:hover & {
     visibility: visible;
     opacity: 1;
   }
-`;
-
-export const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  aspect-ratio: 1 / 1;
 `;
 
 export const ActionsWrapper = styled.div`
