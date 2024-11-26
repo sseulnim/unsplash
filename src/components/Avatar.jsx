@@ -14,7 +14,8 @@ const AvatarWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  color: white;
+  color: #fff;
+  cursor: pointer;
 
   img {
     width: 30px;
