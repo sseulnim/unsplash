@@ -7,7 +7,12 @@ function DownloadButton() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d="M1 1L6 6L11 1" stroke="#767676" stroke-width="2" />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M5.99992 7.41421L0.292819 1.70711L1.70703 0.292894L5.99992 4.58579L10.2928 0.292895L11.707 1.70711L5.99992 7.41421Z"
+        fill="#767676"
+      />
     </svg>
   );
 }

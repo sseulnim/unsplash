@@ -1,22 +1,20 @@
 function ZoomInButton() {
   return (
     <svg
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g opacity="0.94">
         <path
-          d="M14.5 17.7213H2.5V20.6721H9.5L1 29.0328L3 31L11.5 22.6393V29.5246H14.5V17.7213Z"
+          d="M11 13L4 13L4 15L7.5 15L3 19.5L4.50005 21L9 16.5L9 20H11L11 13Z"
           fill="white"
-          stroke="white"
         />
         <path
-          d="M17.5 14.2787L29.5 14.2787L29.5 11.3279L22.5 11.3279L31 2.96721L29 0.999998L20.5 9.36065L20.5 2.47541L17.5 2.47541L17.5 14.2787Z"
+          d="M13 11L20 11L20 9L16.5 9L21 4.5L19.5 3L15 7.5L15 4L13 4L13 11Z"
           fill="white"
-          stroke="white"
         />
       </g>
     </svg>
